@@ -1,27 +1,21 @@
-
-
-window.addEventListener("DOMContentLoaded", (event) => {
-
-    
-  
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-}  
+ 
     function popUpRandomMole() {
-        const moleHeads = document.querySelectorAll(".wgs__mole-head");
-     
-        
-        console.log(moleHeads)
-        const randomNum = getRandomIntInclusive(0, 7)
+       const moleHeads = document.querySelectorAll(
+         ".wgs__mole-head:not(.wgs__mole-head--whacked"
+       ); 
+                
+        const randomNum = Math.floor(Math.random() * moleHeads.length)
         let moleHeadRandom = moleHeads[randomNum]
-        console.log(moleHeadRandom)
-        moleHeadRandom.classList.remove("wgs__mole-head--hidden")
-    
+
+        if (!moleHeadRandom) {
+            console.log('You have won 🏆, you have killed all the moles!!!')
+            return
+        }
+            moleHeadRandom.classList.remove("wgs__mole-head--hidden")
         setTimeout(() => {
-            hideMole(moleHeadRandom);
-        },1000)
+                hideMole(moleHeadRandom);
+            },3000)
+        
     }
 
     function hideMole(mole) {
@@ -31,9 +25,18 @@ function getRandomIntInclusive(min, max) {
         },1000)
     }
 
+window.addEventListener("DOMContentLoaded", (event) => {
+
   setTimeout(() => {
     popUpRandomMole();
   }, 0);
+    const moleHeads = document.querySelectorAll(".wgs__mole-head");
+    moleHeads.forEach((mole) => { 
+        mole.addEventListener('click', (event) => {
+            event.target.classList.add("wgs__mole-head--hidden");
+            event.target.classList.add("wgs__mole-head--whacked")
+        })
+    })
     
     
 });
