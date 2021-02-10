@@ -32,9 +32,9 @@ body{
     grid-template-columns: repeat(4, 1fr);
 }
 
-/* .wgs__mole-head--hidden{
+.wgs__mole-head--hidden{
     margin-top: 482px;
     transition-property: margin-top;
     transition-duration: .25s;
     
-} */
+}
